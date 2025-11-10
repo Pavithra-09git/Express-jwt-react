@@ -31,7 +31,7 @@ const Dashboard = () => {
   
     return (
       <div>
-        {users.map((user) => (
+        {userArr.map((user) => (
           <p key={user._id}>
             {user.name} - {user.role}
           </p>

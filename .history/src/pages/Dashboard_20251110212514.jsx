@@ -28,10 +28,11 @@ const Dashboard = () => {
       </div>
     );
   } else {
-  
+    const userArr = user?.filter((u) => u._id === localStorage.getItem("id"));
+    console.log(userArr);
     return (
       <div>
-        {users.map((user) => (
+        {userArr.map((user) => (
           <p key={user._id}>
             {user.name} - {user.role}
           </p>

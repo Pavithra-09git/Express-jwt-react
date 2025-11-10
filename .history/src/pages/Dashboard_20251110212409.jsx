@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import api from "../api";
 
 const Dashboard = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUser] = useState([]);
   const loadUsers = async () => {
     try {
       const res = await api.get("/");
-      setUsers(res.data);
+      setUser(res.data);
       console.log(res.data);
     } catch (error) {
       alert(error.response?.data?.message);
@@ -21,17 +21,18 @@ const Dashboard = () => {
    const currentUserId = localStorage.getItem("id");
   const currentUser = users.find((u) => u._id === currentUserId);
 
-  if (currentUser.role === "user") {
+  if (user.role === "user") {
     return (
       <div>
-        {currentUser.name}-{currentUser.role}
+        {user.name}-{user.role}
       </div>
     );
   } else {
-  
+    const userArr = user?.filter((u) => u._id === localStorage.getItem("id"));
+    console.log(userArr);
     return (
       <div>
-        {users.map((user) => (
+        {userArr.map((user) => (
           <p key={user._id}>
             {user.name} - {user.role}
           </p>
