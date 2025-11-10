@@ -26,7 +26,7 @@ const EditUser = () => {
 
   const submit = async (e) => {
     e.preventDefault();
-    await api.put(`/profile${id}`, form);
+    await api.put(`/${id}`, form);
     nav("/admin");
   };
   return (
