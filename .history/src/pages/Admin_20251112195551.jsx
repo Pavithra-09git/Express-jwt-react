@@ -21,7 +21,7 @@ const Admin = () => {
   }, []);
 
   const deleteUser = async (id) => {
-    await api.delete(`/profile/${id}`);
+    await api.delete(`/profile//${id}`);
     confirm("user deleted");
     loadUsers();
   };
