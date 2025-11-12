@@ -55,9 +55,7 @@ const Dashboard = () => {
   const loadUsers = async () => {
     try {
       const res = await api.get("/");
-      // Ensure users is always an array
-      setUsers(Array.isArray(res.data) ? res.data : [res.data]);
-      console.log(res.data);
+      setUsers(res.data);
     } catch (error) {
       alert(error.response?.data?.message);
     } finally {
@@ -69,15 +67,14 @@ const Dashboard = () => {
     loadUsers();
   }, []);
 
+  const currentUserId = localStorage.getItem("id");
+  const currentUser = users.find((u) => u._id === currentUserId);
+
   if (loading) return <div>Loading...</div>;
 
-  const currentUserId = localStorage.getItem("id");
-  const currentUser = Array.isArray(users)
-    ? users.find((u) => u._id === currentUserId)
-    : null;
+  if (!currentUser) return <div>User not found</div>; // Safety check
 
-  if (!currentUser) return <div>User not found</div>;
-
+  // Now currentUser is guaranteed to exist
   if (currentUser.role === "user") {
     return (
       <div>
